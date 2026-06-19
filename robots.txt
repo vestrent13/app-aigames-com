@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://vestrent13.github.io/app-aigames-com/sitemap.xml

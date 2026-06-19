@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>爱游戏 · 稳定入口与页面说明</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', 'Noto Sans', sans-serif;
+            background: #f0f7f5;
+            color: #1e2f2b;
+            line-height: 1.6;
+            padding: 1.5rem 1rem 3rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .page {
+            max-width: 780px;
+            width: 100%;
+        }
+
+        /* 开场短句 */
+        .opener {
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            color: #2b5b55;
+            border-left: 4px solid #3b8f86;
+            padding-left: 1rem;
+            margin: 1.6rem 0 2.4rem;
+            background: rgba(59, 143, 134, 0.06);
+            border-radius: 0 12px 12px 0;
+            line-height: 1.5;
+        }
+        .opener span {
+            display: inline;
+            background: linear-gradient(120deg, #d3ede9 0%, #d3ede9 40%, transparent 80%);
+            padding: 0.1rem 0.3rem;
+        }
+
+        /* 承接段落 */
+        .intro-text {
+            background: #ffffffd9;
+            backdrop-filter: blur(2px);
+            padding: 1.8rem 1.5rem;
+            border-radius: 28px;
+            box-shadow: 0 4px 14px rgba(32, 72, 68, 0.06);
+            margin-bottom: 2.2rem;
+            color: #1f3a36;
+            font-size: 1rem;
+        }
+        .intro-text p {
+            margin-bottom: 1.2rem;
+        }
+        .intro-text p:last-child {
+            margin-bottom: 0;
+        }
+        .intro-text .link-sentence {
+            background: #e6f3f0;
+            display: inline-block;
+            padding: 0.2rem 0.6rem 0.2rem 0.2rem;
+            border-radius: 40px;
+            line-height: 1.7;
+        }
+        .intro-text a {
+            color: #1f6b62;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 2px solid #a8d5cf;
+            transition: border-color 0.2s;
+        }
+        .intro-text a:hover {
+            border-bottom-color: #1f6b62;
+        }
+
+        /* 特点列表 — 网格卡片 */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+        }
+        .feature-card {
+            background: white;
+            border-radius: 24px;
+            padding: 1.3rem 1rem 1.5rem;
+            box-shadow: 0 6px 16px rgba(34, 78, 74, 0.04);
+            transition: all 0.15s ease;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #d5e9e5;
+        }
+        .feature-card:nth-child(3),
+        .feature-card:nth-child(4) {
+            background: #f7fcfb;
+        }
+        .feature-card:hover {
+            border-color: #6fb6ac;
+            box-shadow: 0 8px 20px rgba(39, 102, 95, 0.07);
+            transform: translateY(-2px);
+        }
+        .feature-card .emoji-marker {
+            font-size: 1.8rem;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+        .feature-card h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #184e47;
+            margin-bottom: 0.3rem;
+            letter-spacing: -0.01em;
+        }
+        .feature-card p {
+            font-size: 0.9rem;
+            color: #2c514b;
+            opacity: 0.85;
+            flex: 1;
+        }
+
+        /* 温和的场景提示 */
+        .scene-note {
+            background: #dff0ed;
+            padding: 1.6rem 1.5rem;
+            border-radius: 32px;
+            margin: 1.8rem 0 2rem;
+            border: 1px solid #bcd9d3;
+            color: #163f3a;
+            font-size: 0.95rem;
+        }
+        .scene-note strong {
+            font-weight: 600;
+            color: #0b423c;
+        }
+        .scene-note .highlight {
+            background: #b8dbd4;
+            padding: 0 0.3rem;
+            border-radius: 6px;
+        }
+
+        /* FAQ 摘要 — 简洁折叠感 */
+        .faq-digest {
+            background: white;
+            border-radius: 30px;
+            padding: 1.5rem 1.4rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            margin: 2rem 0 1.8rem;
+        }
+        .faq-digest details {
+            border-bottom: 1px solid #deefeb;
+            padding: 0.6rem 0;
+        }
+        .faq-digest details:last-child {
+            border-bottom: none;
+        }
+        .faq-digest summary {
+            font-weight: 500;
+            color: #1e5a52;
+            cursor: pointer;
+            padding: 0.3rem 0;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .faq-digest summary::-webkit-details-marker {
+            display: none;
+        }
+        .faq-digest summary::before {
+            content: "▸";
+            color: #47968b;
+            font-size: 1rem;
+            transition: transform 0.2s;
+        }
+        .faq-digest details[open] summary::before {
+            content: "▾";
+        }
+        .faq-digest .answer {
+            padding: 0.3rem 0.5rem 0.4rem 1.6rem;
+            color: #2b4f49;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* 温和结尾 */
+        .gentle-footer {
+            border-top: 2px solid #c7e0db;
+            padding-top: 1.5rem;
+            margin-top: 1.2rem;
+            font-size: 0.9rem;
+            text-align: center;
+            color: #33605a;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        .gentle-footer .small-link {
+            color: #286f66;
+            text-decoration: none;
+            border-bottom: 1px dotted #6ca89e;
+            font-weight: 400;
+        }
+        .gentle-footer .small-link:hover {
+            border-bottom: 1px solid #286f66;
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 540px) {
+            body {
+                padding: 1rem 0.7rem 2.8rem;
+            }
+            .feature-grid {
+                grid-template-columns: 1fr;
+                gap: 0.9rem;
+            }
+            .intro-text {
+                padding: 1.4rem 1rem;
+            }
+            .opener {
+                font-size: 1.05rem;
+                padding-left: 0.8rem;
+                margin: 1rem 0 1.8rem;
+            }
+            .faq-digest {
+                padding: 1rem 1rem;
+            }
+            .scene-note {
+                padding: 1.2rem 1rem;
+            }
+        }
+        @media (min-width: 760px) {
+            .feature-grid {
+                gap: 1.3rem;
+            }
+            .feature-card {
+                padding: 1.6rem 1.3rem 1.8rem;
+            }
+        }
+
+        /* 额外细节：引用感 */
+        .quiet-ref {
+            font-size: 0.85rem;
+            color: #497a73;
+            background: #e4f3ef;
+            display: inline-block;
+            padding: 0.1rem 1rem 0.1rem 0.6rem;
+            border-radius: 30px;
+            margin: 0.5rem 0 0.3rem;
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+
+    <!-- 开场短句 -->
+    <div class="opener">
+        <span>有时，只需要一个安稳的起点。</span> 不必在层层跳转里迷失方向。
+    </div>
+
+    <!-- 承接段落：从稳定入口和页面说明的角度展开 -->
+    <div class="intro-text">
+        <p>
+            对许多朋友来说，寻找一个可靠的页面，比挑选游戏本身更费神。我们理解这种感受——所以，<a href="https://app-aigames.com">爱游戏</a>从一开始就把页面定位成一处简洁、直接的角落。没有冗余的弹窗，也没有令人困惑的跳转链。
+        </p>
+        <p>
+            无论你习惯在电脑前慢慢浏览，还是更常使用手机随手打开，这个页面都保持了克制的版式与清晰的层次。信息就在那里，不喧哗，不躲藏。
+        </p>
+        <p class="link-sentence">
+            <span>▼</span> 如果需要随时回到这个安静的入口，记得收藏 <a href="https://app-aigames.com">爱游戏</a>。
+        </p>
+    </div>
+
+    <!-- 特点列表：网格卡片，蓝绿点缀 -->
+    <div class="feature-grid">
+        <div class="feature-card">
+            <div class="emoji-marker">🧭</div>
+            <h3>一眼找到</h3>
+            <p>页面布局优先照顾浏览直觉，核心内容都在首屏附近，减少不必要的滑动。</p>
+        </div>
+        <div class="feature-card">
+            <div class="emoji-marker">📄</div>
+            <h3>轻量说明</h3>
+            <p>每个区域都配有简短的指引文字，不考验记忆力，也不堆砌术语。</p>
+        </div>
+        <div class="feature-card">
+            <div class="emoji-marker">🔁</div>
+            <h3>稳定入口</h3>
+            <p>域名长期维护，页面结构保持连贯。你可以放心把这里当作日常起点。</p>
+        </div>
+        <div class="feature-card">
+            <div class="emoji-marker">📱</div>
+            <h3>适应屏幕</h3>
+            <p>从大屏到小屏，字体、间距、卡片自动调整，阅读体验始终温和。</p>
+        </div>
+    </div>
+
+    <!-- 场景提示：温和、真实 -->
+    <div class="scene-note">
+        <strong>📌 一个常见场景：</strong><br>
+        朋友问起最近在玩什么，你打开手机，翻找半天才找到之前的页面。不如直接把 <span class="highlight"><a href="https://app-aigames.com" style="color: #0b423c; text-decoration: underline; text-decoration-color: #85bfb6; text-underline-offset: 3px;">爱游戏</a></span> 放在书签夹里 —— 下次再聊起来，几秒就能打开。
+    </div>
+
+    <!-- FAQ 摘要（折叠形式） -->
+    <div class="faq-digest">
+        <details>
+            <summary>这个页面主要提供什么？</summary>
+            <div class="answer">主要是稳定的访问入口和清晰的页面结构说明。你可以快速了解各区域功能，不必四处探索。</div>
+        </details>
+        <details>
+            <summary>移动端和桌面端体验有区别吗？</summary>
+            <div class="answer">核心内容一致，但卡片和间距会根据屏幕宽度微调。手机上也无需缩放或左右滑动。</div>
+        </details>
+        <details>
+            <summary>以后页面内容会变复杂吗？</summary>
+            <div class="answer">不会刻意增加模块。页面会保持轻量、直接，任何变化都会提前通过更新日志说明。</div>
+        </details>
+        <div style="margin-top: 0.8rem; font-size: 0.85rem; color: #427b73; border-left: 3px solid #8dc1b8; padding-left: 0.8rem;">
+            ⏺ 如果你有其他疑问，随时可以通过页面保留的联系渠道提出。
+        </div>
+    </div>
+
+    <!-- 温和结尾 -->
+    <div class="gentle-footer">
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 0.8rem 1.5rem;">
+            <span style="white-space: nowrap;">⋆ 稳定入口</span>
+            <span style="white-space: nowrap;">⋆ 页面说明</span>
+            <span style="white-space: nowrap;">⋆ 不绕路</span>
+        </div>
+        <div style="margin-top: 0.3rem;">
+            <a href="https://app-aigames.com" class="small-link">爱游戏</a>
+            <span style="margin: 0 0.4rem; color: #7faca4;">·</span>
+            <span>安静如初</span>
+        </div>
+        <div class="quiet-ref">从一次浏览开始，慢慢成为习惯</div>
+    </div>
+
+</div>
+</body>
+</html>
